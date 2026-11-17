@@ -21,8 +21,8 @@ for q in range(128):
 CK={0:13,7:14,4:12,112:7,119:11,116:3}
 KN=(-33,-31,-18,-14,14,18,31,33);KI=(-17,-16,-15,-1,1,15,16,17);BI=(-17,-15,15,17);RI=(-16,-1,1,16)
 B=[0]*128;S=1;C=0;Y=-1;W=0;WK=4;BK=116;H=0;U=[];HS=set();PC={};L=0;TT={};KL=[0]*256;EM=EE=PH=0
-Q=b')4)L-+bg.Z+d)PK-f^.;0,<K=3[e.I5U./;5dCU]6G`1^7f(P+?B],/A_12_AaUJ9B]QU=C]3QXEX,*(IW0J*N;BSLP>V,ZUKQPJZ41S+]PQ*+^aKI]dNAUZ';P={}
-for i in range(0,120,5):
+Q=b'(-AKL)4)L-*dD(-+bg.Z+d)PK-f^.;0,<K=1DCMX3SdH>3[e.I5U./;5dCU]6G`1^7:=W[7f(P+9/P4,?7N2]?B],/@7E2.A_12_AaUJ9B]QU=C]3QXDUFWODWVMJEX,*(F[g7=G+B3ZIW0J*JcGQ^LV5R`N;BSLN]8L+O,-Q-P>V,ZPOfH8U;-S/UKQPJVc-R*Z41S+[]6/X]PQ*+^49,)^aKI]`b*)HdNAUZdU*0M';P={}
+for i in range(0,235,5):
  n=0
  for c in Q[i:i+5]:n=n*64+c-40-(c>91)
  P[n>>14]=n&16383
