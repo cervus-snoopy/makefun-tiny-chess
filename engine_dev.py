@@ -1,250 +1,264 @@
-import json,os,sys,urllib.request as u
-E=os.environ.get('MAKEFUN_ENV_URL') or sys.exit('no env')
-V=[0,100,320,330,500,900,0];M=1e5
-x=0x9e3779b97f4a7c15
-def R():
- global x;x=(x*6364136223846793005+1442695040888963407)&(1<<64)-1;return x
-Z=[[R()for _ in range(128)]for _ in range(13)];ZS=R();ZC=[R()for _ in range(16)];ZE=[R()for _ in range(8)]
-X=b'PPPPPPPP!6wu!4ls5!6N!4X!57U^dUsG1!57VlI`REU(LjMbUET-OgPJ^Po!579s=MXx_!5(gPPPPPPP!3^!6c!6KA!72!3g!6g!4Xsq!75,Cx!5-82!7/9md!6A!5,3!5/kRs@q!51T-b]M`GR3A_fNYNX!5;C8!6=YRd0K!4_!6i+jaEYLJr!4_!6A]?!6EA>!6>.U!6?n!5;!4tp!6IVMK`C)NY_pCP2GLdP^X:NJL`PPO^GHJ[Q@W_]0.oEIXQ5c!6IZFd]!5.g]@UkTcC!5;c!53iWZ=ma!57(^cdN[!59D@Z_[Z@^3:eYOeMK4EmL[X]?!4t!6HV_aOG!58[Nmn?!6CAOR!4pAsV?!6^3k!4rLiQflGZ!4aP[P`c=SF?bOXNWJEaCYMW]G(ldGVW>TN?Yd7FJ=A!6mI1!5;gu[a2=^OT.Yer:>Lka!58UMXAMU[:C!6D6DIR[>vPH8R_`DmVA!5,fljO9!6G8!4s!6R,!6HFBPPPPPPP!7wKA8^Arg!4WVA>EMnR!50HEHIV^PLLDLPO[LUSCWOKTIfKPRSCRGWPPPPPPP!5*ejAMT,,!6_b?hI@Q4mToOFHF:iedPPEM6P]gYGQC:KeRaKC?N<gZUS>M;`:mXIT0B!6FIZSQNHIaT[=YFYFaFXOOXJTI]SMULIOHYZVDSCJMY[RSFFHQL[VUCJDT_BcLI[DoMXMMPLMVRPNBVUKTPPNOINRWOZDQONSQRSLGONMWTKTJKTHZPVREPNXJ[QLLHb8[pPUPHGZ+v]Yb/U2<kS!6<ND@FJdRf]?b;!5.!6BGm@SU@)E!6>GSXIK5OI_PICTOUV;w5];/xbPWkE;UnMSPfADOWVHUjO1;oRSOWI9;_jSSLB<Ha_ZRIG@>a`YQFGD,d^Z?_F=!7A!8tm!74!<X!(t!6s!8/a!8K!;,!*,PPQPQRL';T=[];v=0;i=0
+import os,time,random,urllib.request,json
+class TO(Exception):pass
+D=lambda b:b-33-(b>39)-(b>92)
+X=b'$F&0fp$e&3w&!n$R%Sd%p&2V&"kSSTSTUOSSSSSSSS$Vx"dv8$."P#"XagXvJ4#"YoLcUHX+OmPeXHW0RjSMaSr#"<v@P[{b"qjSSSSSSS!b$B$+D$c!k$F"Pvt$f/F{"v;5$`<pg#~"u6"xnUvCt"zW0e`PcJU6DbiQ]Q[*F;}]Ug3N"V$H.mdH]OMu"V#~`B$$DA~1X#|q*"ls$)YPNcF,Q]bsFS5JOgSa[=QMOcSSRaJKM_TCZb`31rHL[T8f$)^Ig`"wj`CXnWfF*f"|lZ^@pd#"+afgQ_(GC^b_^Ca6=h]RhPN7HpO_[`B"l$(YbdRJ##_QpqB$"DRU"hDvYB$=6n"jOlTioJ^"XS_Scf@VIBeR[QZMHdF]PZ`J+ogJYZAWQB]g:IM@D$LL4*jx_d5@aRW1]hu=AOnd##XP[DPX_=F$#9GLU_AySK;UbcGpYD"uiomR<$&;"k$2/$(IESSSSSSS%JND;aDuj"OYDAHPqU"yKHKLYaSOOGOSR_OXVFZRNWLiNSUVFUJZSSSSSSS"shmDPW//$>eBkLCT7pWrRIKI=lhgSSHP9S`j]JTF=NhUdNFBQ?j^XVAP>c=p[LW3E$%L^VTQKLdW_@]I]IdI[RR[MWL`VPXOLRK]^YGVFMP]_UVIIKTO_YXFMGWbEfOL_GrP[PPSOPYUSQEYXNWSSQRLQUZR^GTRQVTUVOJRQPZWNWMNWK^SYUHSQ[M_TOOKe;_sSXSKJ^.y`]e2X5?nV|QGCIMgUi`Be>"w$!JpCVXC,H~JV[LN8RLbSLFWRXY>z8`>2{eSZnH>XqPVSiDGRZYKXmR4>rUVRZL<>bmVVOE?Kdb^ULJCAdc]TIJG/ga^BbI@';MG=[0]*1664;EG=[0]*1664;W=[];v=0;i=0;j=0
 while i<len(X):
- c=X[i];i+=1
- if c==33:v+=((X[i]-40-(X[i]>91))*80+X[i+1]-40-(X[i+1]>91))-1100;i+=2
- else:v+=c-80-(c>91)
- T.append(v)
-MG=[0]*1664;EG=[0]*1664
-for q in range(128):
- if q&136:continue
- r=q>>4;f=q&7;i=(7-r)*8+f;j=r*8+f
- for t in range(1,7):
-  MG[(t+6)*128+q]=T[768+t-1]+T[(t-1)*64+i];MG[(6-t)*128+q]=-(T[768+t-1]+T[(t-1)*64+j])
-  EG[(t+6)*128+q]=T[774+t-1]+T[384+(t-1)*64+i];EG[(6-t)*128+q]=-(T[774+t-1]+T[384+(t-1)*64+j])
-CK={0:13,7:14,4:12,112:7,119:11,116:3}
-KN=(-33,-31,-18,-14,14,18,31,33);KI=(-17,-16,-15,-1,1,15,16,17);BI=(-17,-15,15,17);RI=(-16,-1,1,16)
-B=[0]*128;S=1;C=0;Y=-1;W=0;WK=4;BK=116;H=0;U=[];HS=set();PC={};L=0;TT={};KL=[0]*256;EM=EE=PH=0
-Q=b'(-AKL)4)L-*dD(-+bg.Z+d)PK-f^.;0,<K=1DCMX3SdH>3[e.I5U./;5dCU]6G`1^7:=W[7f(P+9/P4,?7N2]?B],/@7E2.A_12_AaUJ9B]QU=C]3QXDUFWODWVMJEX,*(F[g7=G+B3ZIW0J*JcGQ^LV5R`N;BSLN]8L+O,-Q-P>V,ZPOfH8U;-S/UKQPJVc-R*Z41S+[]6/X]PQ*+^49,)^aKI]`b*)HdNAUZdU*0M';P={}
-for i in range(0,235,5):
+ k=D(X[i]);i+=1
+ if k<5:v+=k*92+D(X[i])-230;i+=1
+ elif k==5:v+=D(X[i])*92+D(X[i+1])-1100;i+=2
+ else:v+=k-49
+ if j<19:W.append(v)
+ else:
+  k=j-19;t=k//64+1;a=k%64;q=(7-a//8)*16+a%8;w=a//8*16+a%8
+  if k<384:MG[(t+6)*128+q]=W[t-1]+v;MG[(6-t)*128+w]=-W[t-1]-v
+  else:t-=6;EG[(t+6)*128+q]=W[t+5]+v;EG[(6-t)*128+w]=-W[t+5]-v
+ j+=1
+PV=W[12:]
+R=random.Random(20261119)
+Z=[[R.getrandbits(64) for _ in range(128)] for _ in range(13)]
+ZS=R.getrandbits(64);ZC=[R.getrandbits(64) for _ in range(16)];ZE=[R.getrandbits(64) for _ in range(8)]
+V=[0,100,320,330,500,900,20000];RM={4:3,116:12,7:1,0:2,119:4,112:8}
+B=[0]*128;S=1;C=0;E=-1;H=0;EM=EE=PH=0;U=[];HS=set();TT={};KL=[[0,0] for _ in range(256)]
+N=0;L=150000;T0=0;TM=7;WK=4;BK=116
+Q=b'$KfA5-]ZDM!uw;?61n"HPx37WyBW&<1b>&)SF~ogI@u<KKyqc{Fjioy,x>HZ#z"V:wg9`roDbD8OC4t+Ev*dF*V7PZ{jZaZ8xG.B(k>D:`I2/GX>2gZ6>UrvGa4mc(->q"Sk1!xj4Q#oOu?Yad|ks9`[!ifc3,ly7@[w>WRUM~c6V_6W(s(M.;&Yox(KuyvC"w8>0T00Q=UdR!bcZ/B&(nIq,pwTY@)dZS=dx[;X$dh](SlF.z~t;%Aq-L=r=/Ji><IEYEa^i^:B1.j@D*`Y';P={}
+for i in range(0,len(Q),4):
  n=0
- for c in Q[i:i+5]:n=n*64+c-40-(c>91)
+ for c in Q[i:i+4]:n=n*92+c-33-(c>39)-(c>92)
  P[n>>14]=n&16383
-D=Exception()
-A='abcdefgh'
-def J(m):return A[m&7]+str(((m&127)>>4)+1)+A[(m>>7)&7]+str((((m>>7)&127)>>4)+1)+('nbrq'[(m>>14)-2] if m>>14 else '')
-def at(q,by):
- b=B
- for d in (-15,-17) if by>0 else (15,17):
-  z=q+d
-  if 0<=z<128 and not z&136 and b[z]==by:return 1
- for ds,pp in ((KN,2),(KI,6)):
-  for d in ds:
-   z=q+d
-   if 0<=z<128 and not z&136 and b[z]==by*pp:return 1
- for d in BI:
-  z=q+d
-  while 0<=z<128 and not z&136:
-   p=b[z]
-   if p:
-    if p==by*3 or p==by*5:return 1
-    break
-   z+=d
- for d in RI:
-  z=q+d
-  while 0<=z<128 and not z&136:
-   p=b[z]
-   if p:
-    if p==by*4 or p==by*5:return 1
-    break
-   z+=d
- return 0
-def PP(ms,q,to):
- if to>>4 in(0,7):
-  for pr in(5,4,3,2):ms.append(q|to<<7|pr<<14)
- else:ms.append(q|to<<7)
-def G(o):
- b=B;ms=[]
- for q,p in enumerate(b):
-  if p*S<=0:continue
-  t=abs(p)
-  if t==1:
-   d=16*S;to=q+d
-   if not b[to] and (not o or to>>4 in(0,7)):
-    PP(ms,q,to)
-    if not o and to>>4 not in(0,7) and (S>0 and q>>4==1 or S<0 and q>>4==6) and not b[q+2*d]:ms.append(q|(q+2*d)<<7)
-   for z in(q+d-1,q+d+1):
-    if z&136 or z<0 or z>=128:continue
-    if b[z]*S<0 or z==Y:PP(ms,q,z)
-  elif t==2:
-   for d in KN:
-    z=q+d
-    if 0<=z<128 and not z&136 and b[z]*S<=0 and (not o or b[z]):ms.append(q|z<<7)
-  elif t==6:
-   for d in KI:
-    z=q+d
-    if 0<=z<128 and not z&136 and b[z]*S<=0 and (not o or b[z]):ms.append(q|z<<7)
-   kf=4 if S>0 else 116
-   for bt,md,to,rk,fr in ((1,5,6,7,-1),(2,3,2,0,1)) if S>0 else ((4,117,118,119,-1),(8,115,114,112,113)):
-    if not o and C&bt and not b[md] and not b[to] and b[rk]==4*S and (fr<0 or not b[fr]) and not at(kf,-S) and not at(md,-S) and not at(to,-S):ms.append(kf|to<<7)
+def PF(fen):
+ global B,S,C,E,H,EM,EE,PH,WK,BK
+ B=[0]*128;EM=EE=PH=0;H=0
+ pp,sd,ca,ep,_,_=fen.split()
+ r=7;f=0
+ for ch in pp:
+  if ch=='/':r-=1;f=0
+  elif ch.isdigit():f+=int(ch)
   else:
-   ds=BI if t==3 else RI if t==4 else BI+RI
-   for d in ds:
-    z=q+d
-    while 0<=z<128 and not z&136:
-     if b[z]*S<=0 and (not o or b[z]):ms.append(q|z<<7)
-     if b[z]:break
-     z+=d
+   p='PNBRQK'.index(ch.upper())+1
+   if ch.islower():p=-p
+   q=r*16+f;B[q]=p;EM+=MG[(p+6)*128+q];EE+=EG[(p+6)*128+q];PH+=PV[abs(p)];H^=Z[p+6][q]
+   if p==6:WK=q
+   if p==-6:BK=q
+   f+=1
+ S=1 if sd=='w' else -1
+ if S<0:H^=ZS
+ C=0
+ if ca!='-':
+  if 'K' in ca:C|=1
+  if 'Q' in ca:C|=2
+  if 'k' in ca:C|=4
+  if 'q' in ca:C|=8
+ H^=ZC[C]
+ E=-1
+ if ep!='-':
+  E=(int(ep[1])-1)*16+ord(ep[0])-97;H^=ZE[E&7]
+def J(m):
+ f=m&127;t=(m>>7)&127;pr=(m>>14)&7
+ s=chr(97+(f&7))+str((f>>4)+1)+chr(97+(t&7))+str((t>>4)+1)
+ if pr:s+='nbrq'[pr-2]
+ return s
+def AT(s,by):
+ for x in (s-15*by,s-17*by):
+  if not x&136 and B[x]==by:return 1
+ for d,v in ((14,2),(18,2),(31,2),(33,2),(1,6),(15,6),(16,6),(17,6)):
+  for x in (s+d,s-d):
+   if not x&136 and B[x]==v*by:return 1
+ for d,v in ((1,4),(16,4),(15,3),(17,3)):
+  for g in (1,-1):
+   x=s+g*d
+   while not x&136:
+    if B[x]:
+     if B[x]==v*by or B[x]==5*by:return 1
+     break
+    x+=g*d
+ return 0
+def G(cp):
+ ms=[]
+ for q in range(128):
+  if q&136:continue
+  p=B[q]
+  if p*S<=0:continue
+  a=abs(p);d=16*S
+  if a==1:
+   t=q+d
+   if not t&136 and B[t]==0:
+    r=t>>4
+    if r==7 or r==0:
+     for pr in (5,4,3,2):ms.append(q|(t<<7)|(pr<<14))
+    elif not cp:
+     ms.append(q|(t<<7))
+     t2=q+2*d
+     if ((q>>4)==1 and S>0 or (q>>4)==6 and S<0) and not t2&136 and B[t2]==0:ms.append(q|(t2<<7))
+   for t in (q+d-1,q+d+1):
+    if t&136:continue
+    if B[t]*S<0:
+     r=t>>4
+     if r==7 or r==0:
+      for pr in (5,4,3,2):ms.append(q|(t<<7)|(pr<<14))
+     else:ms.append(q|(t<<7))
+    elif t==E and E>=0:ms.append(q|(t<<7))
+  elif a==2 or a==6:
+   for o in ((14,18,31,33),(1,15,16,17))[a==6]:
+    for t in (q+o,q-o):
+     if not t&136 and B[t]*S<=0 and (not cp or B[t]):ms.append(q|(t<<7))
+  else:
+   ds=(15,17) if a==3 else (1,16) if a==4 else (1,15,16,17)
+   for o in ds:
+    for g in (1,-1):
+     t=q+g*o
+     while not t&136:
+      if B[t]:
+       if B[t]*S<0:ms.append(q|(t<<7))
+       break
+      if not cp:ms.append(q|(t<<7))
+      t+=g*o
+ if not cp:
+  for f,k,r,t,by,em,at in ((1,4,7,6,-1,(5,6),(4,5,6)),(2,4,0,2,-1,(3,2,1),(4,3,2)),(4,116,119,118,1,(117,118),(116,117,118)),(8,116,112,114,1,(115,114,113),(116,115,114))):
+   if C&f and S==-by and B[k]==-6*by and B[r]==-4*by and all(B[e]==0 for e in em) and not any(AT(a,by) for a in at):ms.append(k|(t<<7))
  return ms
 def K(m):
- global S,C,Y,W,WK,BK,H,EM,EE,PH
- b=B;f=m&127;t=m>>7&127;pr=m>>14;p=b[f];cp=b[t];ec=-1
- if abs(p)==1 and t==Y and not cp:ec=t-16*S;cp=b[ec]
- e=ec if ec>=0 else t
- U.append((cp,C,Y,W,H,WK,BK,ec,f,t,p,pr,EM,EE,PH))
- u=MG;g=EG;o=(p+6)*128
- dm=u[(pr*S+6)*128+t]-u[o+f] if pr else u[o+t]-u[o+f]
- de=g[(pr*S+6)*128+t]-g[o+f] if pr else g[o+t]-g[o+f]
- dp=T[780+pr]
- if cp:
-  c=(cp+6)*128+e;dm-=u[c];de-=g[c];dp-=T[780+abs(cp)]
- if abs(p)==6 and abs(t-f)==2:
-  r=f+3 if t>f else f-4;v=f+1 if t>f else f-1;dm+=u[(4*S+6)*128+v]-u[(4*S+6)*128+r];de+=g[(4*S+6)*128+v]-g[(4*S+6)*128+r]
- EM+=dm;EE+=de;PH+=dp
+ global S,C,E,H,EM,EE,PH,WK,BK
+ f=m&127;t=(m>>7)&127;pr=(m>>14)&7
+ p=B[f];cp=0;cq=t
+ if B[t]:cp=B[t]
+ elif abs(p)==1 and t==E and E>=0:cp=-S;cq=t-16*S
+ U.append((f,t,p,cp,cq,C,E,H,EM,EE,PH,WK,BK))
  H^=Z[p+6][f]
- if cp:H^=Z[cp+6][e]
- b[f]=0;b[t]=pr*S if pr else p
- H^=Z[b[t]+6][t]
- if ec>=0:b[ec]=0
+ if cp:H^=Z[cp+6][cq];B[cq]=0;EM-=MG[(cp+6)*128+cq];EE-=EG[(cp+6)*128+cq];PH-=PV[abs(cp)]
+ if E>=0:H^=ZE[E&7]
+ E=-1;B[f]=0;EM-=MG[(p+6)*128+f];EE-=EG[(p+6)*128+f]
+ if pr:
+  n=pr*S;B[t]=n;H^=Z[n+6][t];EM+=MG[(n+6)*128+t];EE+=EG[(n+6)*128+t];PH+=PV[pr]
+ else:
+  B[t]=p;H^=Z[p+6][t];EM+=MG[(p+6)*128+t];EE+=EG[(p+6)*128+t]
  if abs(p)==6 and abs(t-f)==2:
-  r=f+3 if t>f else f-4;v=f+1 if t>f else f-1;b[v]=b[r];b[r]=0;H^=Z[10 if S>0 else 2][r];H^=Z[10 if S>0 else 2][v]
- H^=ZC[C];C&=CK.get(f,15)&CK.get(t,15);H^=ZC[C]
- if Y>=0:H^=ZE[Y&7]
- Y=f+16*S if abs(p)==1 and abs(t-f)==32 else -1
- if Y>=0:H^=ZE[Y&7]
- W=0 if abs(p)==1 or cp else W+1
- if abs(p)==6:
+  rf=f+3 if t>f else f-4;rt=f+1 if t>f else f-1;r=B[rf];B[rf]=0;B[rt]=r
+  H^=Z[r+6][rf]^Z[r+6][rt];EM+=MG[(r+6)*128+rt]-MG[(r+6)*128+rf];EE+=EG[(r+6)*128+rt]-EG[(r+6)*128+rf]
   if p>0:WK=t
   else:BK=t
- H^=ZS;S=-S
- if at(WK if p>0 else BK,S):O();return 0
+ elif abs(p)==6:
+  if p>0:WK=t
+  else:BK=t
+ if abs(p)==1 and abs(t-f)==32:E=t-16*S;H^=ZE[E&7]
+ o=C;C&=~RM.get(f,0);C&=~RM.get(t,0)
+ if C!=o:H^=ZC[o]^ZC[C]
+ S=-S;H^=ZS
+ k=WK if S<0 else BK
+ if AT(k,S):O();return 0
  return 1
 def O():
- global S,C,Y,W,H,WK,BK,EM,EE,PH
- b=B;cp,C,Y,W,H,WK,BK,ec,f,t,p,pr,EM,EE,PH=U.pop()
- S=-S;b[f]=p;b[t]=0 if ec>=0 else cp
- if ec>=0:b[ec]=-S
+ global S,C,E,H,EM,EE,PH,WK,BK
+ f,t,p,cp,cq,C,E,H,EM,EE,PH,WK,BK=U.pop()
+ S=-S
  if abs(p)==6 and abs(t-f)==2:
-  if t>f:b[f+3]=b[f+1];b[f+1]=0
-  else:b[f-4]=b[f-1];b[f-1]=0
-def EV():
- ph=min(PH,24)
- s=(EM*ph+EE*(24-ph))//24
- return s*S
-def OD(ms,tm,pl):
- b=B;r=[]
- for m in ms:
-  s=0;t=m>>7&127;c=b[t]
-  if m==tm:s=1000000
-  else:
-   if c:s=100000+10*V[abs(c)]-abs(b[m&127])
-   if m>>14:s+=200000+V[m>>14]
-   elif m==KL[pl*2]:s=50000
-   elif m==KL[pl*2+1]:s=40000
-  r.append((-s,m))
- r.sort();return [m for _,m in r]
-def QS(a,b,pl):
- global N
- N+=1
- if N>L:raise D
- if pl>64:return EV()
- k=WK if S>0 else BK;ch=at(k,-S)
- if ch:bt=-M-1
- else:
-  st=EV()
-  if st>=b:return st
-  bt=st
-  if st>a:a=st
- lg=0
- for m in (OD(G(1),0,pl) if not ch else OD(G(0),0,pl)):
-  if not K(m):continue
-  lg+=1;s=-QS(-b,-a,pl+1);O()
-  if s>bt:bt=s
-  if s>=b:return s
-  if s>a:a=s
- if ch and not lg:return -M+pl
- return bt
-def SR(d,a,b,pl):
- global N
- N+=1
- if N>L:raise D
- if pl>0 and (W>=100 or H in HS or PC.get(H,0)>1):return 0
- if d<=0:return QS(a,b,pl)
- e=TT.get(H);tm=0
- if e and e[0]>=d:
-  s=e[1]
-  if s>M-1000:s-=pl
-  elif s<-M+1000:s+=pl
-  tm=e[3]
-  if e[2]==1:return s
-  if e[2]==2 and s>=b:return s
-  if e[2]==3 and s<=a:return s
- a0=a;bt=-M-1;bm=0;lg=0
- for m in OD(G(0),tm,pl):
-  if not K(m):continue
-  lg+=1;PC[H]=PC.get(H,0)+1;s=-SR(d-1,-b,-a,pl+1);PC[H]-=1;O()
-  if s>bt:bt=s;bm=m
-  if s>a:a=s
-  if a>=b:
-   if not B[m>>7&127] and not m>>14:
-    if KL[pl*2]!=m:KL[pl*2+1]=KL[pl*2];KL[pl*2]=m
-   break
- if not lg:return -M+pl if at(WK if S>0 else BK,-S) else 0
- ss=bt+pl if bt>M-1000 else bt-pl if bt<-M+1000 else bt
- TT[H]=(d,ss,3 if bt<=a0 else 2 if bt>=b else 1,bm)
- if len(TT)>1e6:TT.clear()
- return bt
-def RT(ms):
- global L,N
- N=0;bt=ms[0];od=ms
- k=H&65535
- if k in P:
-  for m in ms:
-   if m==P[k]:return m
- for d in range(1,65):
-  L=1e9 if d==1 else 1.5e5
-  try:
-   sc={};a=-M-1
-   for m in od:
-    K(m);PC[H]=PC.get(H,0)+1;s=-SR(d-1,-M-1,-a,1);PC[H]-=1;O();sc[m]=s
-    if s>a:a=s
-   od=sorted(od,key=lambda m:-sc[m]);bt=od[0]
-   if sc[bt]>=M-200:break
-  except:break
- return bt
-def PO(p,bo):
- q=u.Request(E+p,data=json.dumps(bo).encode())
- try:
-  with u.urlopen(q) as r:return json.load(r)
- except:sys.exit()
-def PF(fn):
- global S,C,Y,W,H,WK,BK,EM,EE,PH
- f=fn.split();B[:]=[0]*128;H=0;EM=EE=PH=0
- for i,row in enumerate(f[0].split('/')):
-  r=7-i;c=0
-  for ch in row:
-   if ch.isdigit():c+=int(ch)
-   else:
-    q=(r<<4)+c;p=('pnbrqk'.index(ch.lower())+1)*(1 if ch.isupper() else -1);B[q]=p;t=abs(p);H^=Z[p+6][q];EM+=MG[(p+6)*128+q];EE+=EG[(p+6)*128+q];PH+=T[780+t]
-    if t==6:
-     if p>0:WK=q
-     else:BK=q
-    c+=1
- S=1 if f[1]=='w' else -1;C=0
- if f[2]!='-':
-  for ch in f[2]:C|=1<<'KQkq'.index(ch)
- Y=-1 if f[3]=='-' else (int(f[3][1])-1)*16+A.index(f[3][0]);W=int(f[4])
- if S<0:H^=ZS
- H^=ZC[C]
- if Y>=0:H^=ZE[Y&7]
+  rf=f+3 if t>f else f-4;rt=f+1 if t>f else f-1;r=B[rt];B[rt]=0;B[rf]=r
+ B[t]=0;B[f]=p
+ if cp:B[cq]=cp
 def LG():
  ms=[]
  for m in G(0):
-  if K(m):ms.append(m);O()
+  if K(m):O();ms.append(m)
  return ms
+def EV():
+ s=(EM*PH+EE*(24-PH))//24
+ return s if S>0 else -s
+def OK(m,e=0,pl=0):
+ t=(m>>7)&127;v=B[t]
+ if m==e:return 1<<20
+ if v:return V[abs(v)]*16-V[abs(B[m&127])]
+ if m==KL[pl][0]:return 9000
+ if m==KL[pl][1]:return 8000
+ return 0
+def QS(a,b,pl):
+ global N
+ N+=1
+ if N>L or (N&1023==0 and time.time()-T0>TM):raise TO()
+ s=EV()
+ if s>=b:return b
+ if s>a:a=s
+ if pl>40:return a
+ ms=G(1)
+ ms.sort(key=OK,reverse=True)
+ for m in ms:
+  if K(m):
+   s=-QS(-b,-a,pl+1);O()
+   if s>=b:return b
+   if s>a:a=s
+ return a
+def AB(d,a,b,pl):
+ global N
+ N+=1
+ if N>L or (N&1023==0 and time.time()-T0>TM):raise TO()
+ if pl and H in HS:return 0
+ if d<=0:return QS(a,b,pl)
+ e=TT.get(H);em=0
+ if e:
+  ed,es,ef,em=e
+  if ed>=d:
+   if ef==0:return es
+   if ef==1 and es>=b:return b
+   if ef==2 and es<=a:return a
+ ms=G(0)
+ ms.sort(key=lambda m:OK(m,em,pl),reverse=True)
+ be=-30001;bm=0;lg=0;a0=a
+ for i,m in enumerate(ms):
+  if not K(m):continue
+  lg+=1
+  if i==0:s=-AB(d-1,-b,-a,pl+1)
+  else:
+   s=-AB(d-1,-a-1,-a,pl+1)
+   if a<s<b:s=-AB(d-1,-b,-a,pl+1)
+  O()
+  if s>be:be=s;bm=m
+  if s>a:a=s
+  if a>=b:
+   if not B[(m>>7)&127]:KL[pl][1]=KL[pl][0];KL[pl][0]=m
+   break
+ if lg==0:
+  k=WK if S>0 else BK
+  return -30000+pl if AT(k,-S) else 0
+ TT[H]=(d,be,0 if be>a0 and be<b else 1 if be>=b else 2,bm)
+ return be
+def RT(ms):
+ global N,T0
+ k=H&4095
+ if k in P:
+  for m in ms:
+   if m==P[k]:return m
+ T0=time.time();N=0;be=ms[0]
+ ms.sort(key=OK,reverse=True)
+ for d in range(1,65):
+  try:
+   a=-30001;bm=be
+   for m in ms:
+    if not K(m):continue
+    s=-AB(d-1,-30001,-a,1);O()
+    if s>a:a=s;bm=m
+   be=bm
+   ms.remove(be);ms.insert(0,be)
+   if abs(a)>29900:break
+  except TO:break
+ return be
+def post(u,o):
+ w=urllib.request
+ r=w.Request(u,data=json.dumps(o).encode())
+ with w.urlopen(r,timeout=30) as x:return json.load(x)
+def main():
+ u=os.environ.get('MAKEFUN_ENV_URL','')
+ if not u:return
+ while True:
+  try:st=post(u+'/game',{})
+  except Exception:time.sleep(.5);continue
+  s=st.get('status')
+  if s=='done':break
+  if s!='your_move':time.sleep(.1);continue
+  PF(st['fen']);HS.clear()
+  PF('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');HS.add(H)
+  for mv in st.get('moves',[]):
+   for c in LG():
+    if J(c)==mv:K(c);HS.add(H);break
+  PF(st['fen'])
+  ms=LG()
+  if not ms:break
+  post(u+'/move',{'game':st['game'],'move':J(RT(ms))})
+if __name__=='__main__':main()
